@@ -170,19 +170,24 @@ Now that your environment is set up, you can create a sample smart contract that
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-import import "@chainlink/contracts/src/v0.8/AutomationCompatible.sol";
+import "@chainlink/contracts/src/v0.8/AutomationCompatible.sol";
+
+  
 
 contract KeeperCount is AutomationCompatibleInterface {
   uint256 public counter;
   uint256 public interval;
 
+ 
+
   constructor(uint256 _interval) {
     interval = _interval;
   }
 
-  function checkUpkeep(bytes calldata /* checkData */) external override returns (bool upkeepNeeded, bytes memory /* performData */) {
+  function checkUpkeep(bytes calldata /* checkData */) external override view returns (bool upkeepNeeded, bytes memory /* performData */) {
     return (block.timestamp >= counter + interval, "");
   }
+
 
   function performUpkeep(bytes calldata /* performData */) external override {
     counter = block.timestamp;
