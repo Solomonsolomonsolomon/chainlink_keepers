@@ -8,19 +8,19 @@
   - [Requirements](#requirements)
   - [What is Chainlink Keepers?](#what-is-chainlink-keepers)
   - [Use Cases of Chainlink Keepers](#use-cases-of-chainlink-keepers)
-  - [Setting up your Environment](#setting-up-your-environment)
+  - [Setting up Your Environment](#setting-up-your-environment)
   - [Installing Hardhat and Chainlink Libraries](#installing-hardhat-and-chainlink-libraries)
-  - [Creating a Smart Contract with Chainlink Keepers](#creating-a-smart-contract-with-chainlink-keepers)
-  - [Deploying the Smart Contract to Celo Testnet](#deploying-the-smart-contract-to-celo-testnet)
-  - [Registering the Keeper with the Keeper Registry](#registering-the-keeper-with-the-keeper-registry)
-  - [Testing the Smart Contract with Chainlink Keepers](#testing-the-smart-contract-with-chainlink-keepers)
+  - [Creating a Smart Contract With Chainlink Keepers](#creating-a-smart-contract-with-chainlink-keepers)
+  - [Deploying the Smart Contract to the Celo Testnet](#deploying-the-smart-contract-to-the-celo-testnet)
+  - [Registering the Keeper With the Keeper Registry](#registering-the-keeper-with-the-keeper-registry)
+  - [Testing the Smart Contract With Chainlink Keepers](#testing-the-smart-contract-with-chainlink-keepers)
   - [Conclusion](#conclusion)
 
 ## Introduction
 
 **[Chainlink Keepers](https://docs.chain.link/chainlink-automation/introduction/)** is a decentralized service that enables smart contracts to be triggered based on external events, without the need for manual intervention. This makes it possible to automate the execution of certain functions in a smart contract, which can save time and reduce costs.
 
-**[Celo](https://docs.celo.org/learn/celo-overview)** is a mobile-first blockchain platform that aims to provide financial access to anyone with a mobile phone. It is built on Ethereum and uses a proof-of-stake consensus mechanism. By integrating Chainlink Keepers with Celo, developers can create more robust and efficient smart contracts that can be triggered automatically.
+**[Celo](https://docs.celo.org/learn/celo-overview)** is a mobile-first blockchain platform that aims to provide financial access to anyone with a mobile phone. It is built on the [Ethereum Virtual Machine (EVM)](https://ethereum.org/en/developers/docs/evm/) and uses a proof-of-stake consensus mechanism. By integrating Chainlink Keepers with Celo, developers can create more robust and efficient smart contracts that can be triggered automatically.
 
 ## Prerequisites
 
@@ -28,14 +28,13 @@ To follow this tutorial, you will need the following:
 
 - Basic understanding of blockchain technology and smart contracts
 - Familiarity with Solidity programming language
-- Basic Javascript programming skills
-- Basic knowledge of Celo blockchain
+- Basic JavaScript programming skills
+- Basic knowledge of the Celo blockchain
 - Access to a Celo testnet node
 - Access to a Chainlink node
 
 ## Requirements
-- Node.js and npm installed on your system
-- Hardhat installed on your system
+- [Node.js](https://nodejs.org/en) and npm installed on your system
 - Access to a Celo testnet node
 - Access to a Chainlink node
 
@@ -68,23 +67,23 @@ Some important use cases for Chainlink Keepers include:
 
 
 
-## Setting up your Environment
+## Setting up Your Environment
 
 To get started, you will need to set up your development environment. Here are the steps you need to follow:
 
-1. Install Node.js and npm on your system. You can download them from the official website: https://nodejs.org/en/.
+1. Make sure to have Node.js and npm on your system. You can download them from the official website: https://nodejs.org/en/.
 2. Install Hardhat by running the following command in your terminal:
 
-  ```bash
-    npm install --save-dev hardhat
-  ```
+    ```bash
+      npm install --save-dev hardhat
+    ```
 
 3. Create a new directory for your project and navigate to it in your terminal.
 4. Initialize a new Hardhat project by running the following command:
 
-  ```bash
-    npx hardhat
-  ```
+    ```bash
+      npx hardhat
+    ```
 
 5. Follow the prompts to set up your project. Choose the options that best suit your needs.
 
@@ -96,70 +95,70 @@ After setting up your environment, you will need to install the necessary librar
 
 1. Install the Hardhat Celo plugin by running the following command:
 
-  ```bash
-    npm install @celo/hardhat-plugin
-  ```
+    ```bash
+      npm install @celo/hardhat-plugin
+    ```
 
 2. Install the Hardhat Chainlink plugin by running the following command:
 
-  ```bash
-    npm install @chainlink/hardhat-ethers@0.1.3
-  ```
+    ```bash
+      npm install @chainlink/hardhat-ethers@0.1.3
+    ```
 
 3. Install the Chainlink Keeper library by running the following command:
 
-  ```bash
-    npm install @chainlink/keeper-contracts
-  ```
+    ```bash
+      npm install @chainlink/keeper-contracts
+    ```
 
 4. Configure your Hardhat project to use the Celo and Chainlink plugins. Open your hardhat.config.js file and add the following code:
 
-  ```bash
-    require("@celo/hardhat-plugin");
-    require("@chainlink/hardhat-ethers");
-  ```
+    ```javascript
+      require("@celo/hardhat-plugin");
+      require("@chainlink/hardhat-ethers");
+    ```
 
 5. Configure your Chainlink node URL and the Keeper registry address in your hardhat.config.js file. You can get these values from your Chainlink node:
 
-```bash
-  module.exports = {
-  defaultNetwork: "hardhat",
-  networks: {
-    hardhat: {
-      forking: {
-        url: "https://forno.celo.org",
-      },
-    },
-    celo: {
-      url: "https://forno.celo.org",
-      accounts: {
-        mnemonic: "<your-mnemonic>",
-      },
-    },
-  },
-  keeper: {
-    url: "https://<your-chainlink-node-url>",
-    keeperRegistry: "<your-keeper-registry-address>",
-  },
-  solidity: {
-    compilers: [
-      {
-        version: "0.8.9",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200,
+    ```javascript
+      module.exports = {
+      defaultNetwork: "hardhat",
+      networks: {
+        hardhat: {
+          forking: {
+            url: "https://forno.celo.org",
+          },
+        },
+        celo: {
+          url: "https://forno.celo.org",
+          accounts: {
+            mnemonic: "<your-mnemonic>",
           },
         },
       },
-    ],
-  },
-};
-```
+      keeper: {
+        url: "https://<your-chainlink-node-url>",
+        keeperRegistry: "<your-keeper-registry-address>",
+      },
+      solidity: {
+        compilers: [
+          {
+            version: "0.8.9",
+            settings: {
+              optimizer: {
+                enabled: true,
+                runs: 200,
+              },
+            },
+          },
+        ],
+      },
+    };
+    ```
 
-Note: Replace `<your-mnemonic>`, `<your-chainlink-node-url>`, and `<your-keeper-registry-address>` with the appropriate values for your project.
+>**_Note_**: Replace `<your-mnemonic>`, `<your-chainlink-node-url>`, and `<your-keeper-registry-address>` with the appropriate values for your project.
 
-## Creating a Smart Contract with Chainlink Keepers
+## Creating a Smart Contract With Chainlink Keepers
 
 Now that your environment is set up, you can create a sample smart contract that uses Chainlink Keepers on Celo. Here are the steps you need to follow:
 
@@ -170,7 +169,7 @@ Now that your environment is set up, you can create a sample smart contract that
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-import import "@chainlink/contracts/src/v0.8/AutomationCompatible.sol";
+import "@chainlink/contracts/src/v0.8/AutomationCompatible.sol";
 
 contract KeeperCount is AutomationCompatibleInterface {
   uint256 public counter;
@@ -196,7 +195,7 @@ The `KeeperCounter` contract imports the `AutomationCompatible.sol` file from th
 
 The contract has two public variables: `counter` and `interval`. The `counter` variable keeps track of the last time the `performUpkeep` function was called, while the `interval` variable specifies how often the upkeep function should be performed.
 
-The contract also has two functions that implement the `AutomationCompatibleInterface` interface. The `checkUpkeep` function checks whether the upkeep function needs to be performed, based on the current time and the `interval` variable. If upkeep is needed, it returns a boolean value of true, along with an empty byte array. If upkeep is not needed, it returns a boolean value of false, along with an empty byte array.
+The contract also has two functions that implement the `AutomationCompatibleInterface` interface. The `checkUpkeep` function checks whether the upkeep function needs to be performed, based on the current time and the `interval` variable. If upkeep is needed, it returns a boolean value of **true**, along with an *empty byte array*. If upkeep is not needed, it returns a boolean value of **false**, along with an empty byte array.
 
 The `performUpkeep` function updates the `counter` variable to the current time. This function is called by the Chainlink Keeper system when the `checkUpkeep` function returns true.
 
@@ -204,11 +203,11 @@ Let's now proceed and compile the smart contract.
 
 Compile the contract by running the following command in your terminal:
 
-  ```bash
-    npx hardhat compile
-  ```
+    ```bash
+      npx hardhat compile
+    ```
 
-## Deploying the Smart Contract to Celo Testnet
+## Deploying the Smart Contract to the Celo Testnet
 
 Now that you have created your smart contract, you can deploy it to the Celo network. Here are the steps you need to follow:
 
@@ -237,37 +236,37 @@ The first line imports the `ethers` library from the Hardhat package.
 
 The `main` function is an asynchronous function that deploys the `KeeperCount` contract to the blockchain using the `getContractFactory` method from the `ethers` library. It sets the `interval` variable to 3600, which corresponds to 1 hour. It then logs the address of the deployed contract to the console.
 
-The last few lines of code calls the `main` function and handles any errors that may occur during deployment.
+The last few lines of code call the `main` function and handle any errors that may occur during deployment.
 
 1. Deploy the smart contract to the Celo network by running the following command:
 
-  ```bash
-    npx hardhat run --network celo scripts/deploy.js
-  ```
+    ```bash
+      npx hardhat run --network celo scripts/deploy.js
+    ```
 
 4. Verify that the smart contract was deployed by checking the output in your terminal. You should see a message similar to the following:
 
-  ```bash
-    KeeperCount deployed to: 0x1234567890123456789012345678901234567890
-  ```
+    ```bash
+      KeeperCount deployed to: 0x1234567890123456789012345678901234567890
+    ```
 
-## Registering the Keeper with the Keeper Registry
+## Registering the Keeper With the Keeper Registry
 
 Now that your smart contract is deployed, you can register it with the Keeper Registry so that it can be executed by Chainlink Keepers. Here are the steps you need to follow:
 
 1. Get the ABI for your smart contract by running the following command:
 
-  ```bash
-    npx hardhat compile --export-artifacts
-  ```
+    ```bash
+      npx hardhat compile --export-artifacts
+    ```
 
-This command will generate a `artifacts/contracts/KeeperCount.sol/KeeperCount.json` file that contains the ABI for your smart contract.
+This command will generate an `artifacts/contracts/KeeperCount.sol/KeeperCount.json` file that contains the ABI for your smart contract.
 
 2. Register your smart contract with the Keeper Registry by running the following command:
 
-  ```bash
-    npx hardhat keeper-register --network celo --contract-name KeeperCount --contract-address <your-contract-address> --method-   name performUpkeep --abi-path artifacts/contracts/KeeperCount.sol/KeeperCount.json
-  ```
+    ```bash
+      npx hardhat keeper-register --network celo --contract-name KeeperCount --contract-address <your-contract-address> --method-   name performUpkeep --abi-path artifacts/contracts/KeeperCount.sol/KeeperCount.json
+    ```
 
 This command registers the `KeeperCount` contract with the Keeper Registry and specifies the `performUpkeep` function as the function to be executed by Chainlink Keepers.
 
@@ -275,49 +274,49 @@ Note: Replace `<your-contract-address>` with the address of your deployed `Keepe
 
 3. Verify that your contract is registered with the Keeper Registry by running the following command:
 
-  ```bash
-    npx hardhat keeper-list --network celo
-  ```
+    ```bash
+      npx hardhat keeper-list --network celo
+    ```
 
 This command should return a list of all contracts registered with the Keeper Registry, including your `KeeperCount` contract.
 
-## Testing the Smart Contract with Chainlink Keepers
+## Testing the Smart Contract With Chainlink Keepers
 
 Now that your smart contract is registered with the Keeper Registry, you can test it with Chainlink Keepers. Here are the steps you need to follow:
 
 1. Start your Chainlink node by running the following command:
 
-  ```bash
-    cd <your-chainlink-node-directory>
-    ./chainlink node start
-  ```
+    ```bash
+      cd <your-chainlink-node-directory>
+      ./chainlink node start
+    ```
 
 Note: Replace `<your-chainlink-node-directory>` with the directory where your Chainlink node is installed.
 
 2. Create a new job definition for your smart contract by running the following command:
 
-```json
-curl -X POST -H "Content-Type: application/json" -d '{
-  "initiators": [
-    {
-      "type": "cron",
-      "params": {
-        "schedule": "0 * * * * *" // execute every minute
-      }
-    }
-  ],
-  "tasks": [
-    {
-      "type": "keeper",
-      "confirmations": 0,
-      "params": {
-        "contractAddress": "<your-contract-address>",
-        "functionSelector": "performUpkeep"
-      }
-    }
-  ]
-}' "http://localhost:6688/v2/specs"
-```
+    ```json
+    curl -X POST -H "Content-Type: application/json" -d '{
+      "initiators": [
+        {
+          "type": "cron",
+          "params": {
+            "schedule": "0 * * * * *" // execute every minute
+          }
+        }
+      ],
+      "tasks": [
+        {
+          "type": "keeper",
+          "confirmations": 0,
+          "params": {
+            "contractAddress": "<your-contract-address>",
+            "functionSelector": "performUpkeep"
+          }
+        }
+      ]
+    }' "http://localhost:6688/v2/specs"
+    ```
 
 Again, replace `<your-contract-address>` with the address of your deployed KeeperCount contract.
 
