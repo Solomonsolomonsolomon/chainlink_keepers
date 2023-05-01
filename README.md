@@ -11,7 +11,7 @@
   - [Setting up Your Environment](#setting-up-your-environment)
   - [Installing Hardhat and Chainlink Libraries](#installing-hardhat-and-chainlink-libraries)
   - [Creating a Smart Contract With Chainlink Keepers](#creating-a-smart-contract-with-chainlink-keepers)
-  - [Deploying the Smart Contract to the Celo Testnet](#deploying-the-smart-contract-to-the-celo-testnet)
+  - [Deploying the Smart Contract to the Celo Alfajores Testnet](#deploying-the-smart-contract-to-the-celo-alfajores-testnet)
   - [Registering the Keeper With the Keeper Registry](#registering-the-keeper-with-the-keeper-registry)
   - [Testing the Smart Contract With Chainlink Keepers](#testing-the-smart-contract-with-chainlink-keepers)
   - [Conclusion](#conclusion)
@@ -129,11 +129,12 @@ After setting up your environment, you will need to install the necessary librar
             url: "https://forno.celo.org",
           },
         },
-        celo: {
-          url: "https://forno.celo.org",
+        alfajores: {
+          url: "https://alfajores-forno.celo-testnet.org",
           accounts: {
             mnemonic: "<your-mnemonic>",
           },
+          chainId: 44787,
         },
       },
       keeper: {
@@ -207,7 +208,7 @@ Compile the contract by running the following command in your terminal:
       npx hardhat compile
     ```
 
-## Deploying the Smart Contract to the Celo Testnet
+## Deploying the Smart Contract to the Celo Alfajores Testnet
 
 Now that you have created your smart contract, you can deploy it to the Celo network. Here are the steps you need to follow:
 
